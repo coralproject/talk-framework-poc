@@ -1,5 +1,5 @@
 import {find} from 'lodash';
-import {Context} from '../context';
+import Context from '../context';
 
 const posts = [
   { id: 1, authorId: 1, title: 'Introduction to GraphQL', votes: 2 },
@@ -10,8 +10,8 @@ const posts = [
 
 export default (ctx: Context) => ({
   Posts: {
-    list: () => posts,
-    get: (id: number) => find(posts, {id}),
-    getByAuthor: (authorId: number) => find(posts, {authorId}),
+    list: async () => posts,
+    get: async (id: number) => find(posts, {id}),
+    getByAuthor: async (authorId: number) => find(posts, {authorId}),
   },
 });

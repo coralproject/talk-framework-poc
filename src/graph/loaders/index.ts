@@ -1,7 +1,7 @@
 import * as DataLoader from 'dataloader';
 import {merge} from 'lodash';
 import {Server} from '../../server';
-import {Context} from '../context';
+import Context from '../context';
 
 // Import the core loaders.
 import Authors from './authors';
@@ -9,25 +9,25 @@ import Posts from './posts';
 
 // LoaderFunction is the base loader function type which provides a value given
 // the request context and any additional args.
-export type LoaderFunction = (...args: any[]) => any;
+export type LoaderFunction<V> = (...args: any[]) => Promise<V>;
 
 // Loader is a function that will resolve out the required value.
-export type Loader = LoaderFunction | DataLoader<any, any>;
+export type Loader<T, V> = LoaderFunction<V> | DataLoader<T, V>;
 
 // ILoader is an object which contains the name of the loader as the key and the
 // actual loader as the value.
-export interface ILoader {
-  [loader: string]: Loader;
+export interface ILoader<T, V> {
+  [loader: string]: Loader<T, V>;
 }
 
 // ILoaderNamespace represents a namespace of loaders keyed by the namespace
 // name with the ILoader as the value.
-export interface ILoaderNamespace {
-  [namespace: string]: ILoader;
+export interface ILoaderNamespace<T, V> {
+  [namespace: string]: ILoader<T, V>;
 }
 
 // LoaderFactory takes a context and returns an ILoaderNamespace.
-export type LoaderFactory = (ctx: Context) => ILoaderNamespace;
+export type LoaderFactory<T, V> = (ctx: Context) => ILoaderNamespace<T, V>;
 
 // coreLoaders are the core loaders assembled into a single array. These are merged
 // with those provided by the plugins.

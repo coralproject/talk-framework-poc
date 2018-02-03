@@ -21,7 +21,7 @@ export interface ContextRequest extends express.Request {
 
 // Context provides request contextual interfaces for the resolvers to utilize
 // when resolving fields in the graph.
-export class Context {
+export default class Context {
   public user: any;
   public loaders: ILoaderNamespace;
   public mutators: IMutatorNamespace;

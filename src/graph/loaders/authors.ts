@@ -1,5 +1,6 @@
+import * as DataLoader from 'dataloader';
 import {find} from 'lodash';
-import {Context} from '../context';
+import Context from '../context';
 
 // example data
 const authors = [
@@ -10,6 +11,6 @@ const authors = [
 
 export default (ctx: Context) => ({
   Authors: {
-    get: (id: number) => find(authors, {id}),
+    get: new DataLoader(async (ids: number[]) => authors.filter(({id}) => ids.includes(id))),
   },
 });

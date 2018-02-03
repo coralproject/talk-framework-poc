@@ -1,7 +1,7 @@
 import * as DataLoader from 'dataloader';
 import {merge} from 'lodash';
 import {Server} from '../../server';
-import {Context} from '../context';
+import Context from '../context';
 
 // Import the core mutators.
 // TODO: import them!
